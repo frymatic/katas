@@ -1,42 +1,32 @@
-function saveChecklist() {
-    const tasks = document.querySelectorAll("input[type='checkbox']");
-    const progress = Array.from(tasks).map(task => task.checked);
-    localStorage.setItem("checklist", JSON.stringify(progress));
-}
+async function fetchChecklist(cardId) {
+    try {
+        // Call your serverless function to fetch the checklist data
+        const response = await fetch(`/api/trello?cardId=${cardId}`);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch checklist: ${response.statusText}`);
+        }
 
-function loadChecklist() {
-    const savedProgress = JSON.parse(localStorage.getItem("checklist"));
-    if (savedProgress) {
-        const tasks = document.querySelectorAll("input[type='checkbox']");
-        tasks.forEach((task, index) => {
-            task.checked = savedProgress[index];
+        const data = await response.json();
+
+        // Extract the checklist items
+        const checklistItems = data[0]?.checkItems || []; // Assuming you're working with the first checklist
+
+        // Populate the checklist in the HTML
+        const checklistContainer = document.getElementById('checklist');
+        checklistContainer.innerHTML = ''; // Clear any existing tasks
+
+        checklistItems.forEach(item => {
+            // Create a new list item for each checklist entry
+            const listItem = document.createElement('li');
+            const isChecked = item.state === 'complete'; // Determine checkbox state
+
+            listItem.innerHTML = `
+                <input type="checkbox" id="${item.id}" ${isChecked ? 'checked' : ''}>
+                <label for="${item.id}">${item.name}</label>
+            `;
+            checklistContainer.appendChild(listItem);
         });
+    } catch (error) {
+        console.error('Error fetching checklist:', error);
     }
 }
-
-function resetChecklist() {
-    localStorage.removeItem("checklist");
-    const tasks = document.querySelectorAll("input[type='checkbox']");
-    tasks.forEach(task => (task.checked = false));
-}
-
-async function fetchChecklist(cardId) {
-    // Call the serverless function to get Trello checklist data
-    const response = await fetch(`/api/trello?cardId=${cardId}`);
-    const data = await response.json();
-
-    // Dynamically populate the checklist
-    const checklist = document.getElementById('checklist');
-    checklist.innerHTML = ''; // Clear existing tasks
-    data.forEach(item => {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `<input type="checkbox" id="${item.id}"> ${item.name}`;
-        checklist.appendChild(listItem);
-    });
-}
-
-// Example card ID for fetching the checklist
-const trelloCardId = 'we7nOhd5'; // Replace with a valid card ID
-fetchChecklist(trelloCardId);
-
-document.addEventListener("DOMContentLoaded", loadChecklist);
