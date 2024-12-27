@@ -20,4 +20,23 @@ function resetChecklist() {
     tasks.forEach(task => (task.checked = false));
 }
 
+async function fetchChecklist(cardId) {
+    // Call the serverless function to get Trello checklist data
+    const response = await fetch(`/api/trello?cardId=${cardId}`);
+    const data = await response.json();
+
+    // Dynamically populate the checklist
+    const checklist = document.getElementById('checklist');
+    checklist.innerHTML = ''; // Clear existing tasks
+    data.forEach(item => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `<input type="checkbox" id="${item.id}"> ${item.name}`;
+        checklist.appendChild(listItem);
+    });
+}
+
+// Example card ID for fetching the checklist
+const trelloCardId = 'we7nOhd5'; // Replace with a valid card ID
+fetchChecklist(trelloCardId);
+
 document.addEventListener("DOMContentLoaded", loadChecklist);
