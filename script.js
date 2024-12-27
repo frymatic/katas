@@ -30,3 +30,9 @@ async function fetchChecklist(cardId) {
         console.error('Error fetching checklist:', error);
     }
 }
+
+
+document.addEventListener("DOMContentLoaded", loadChecklist);
+    // Example card ID for fetching the checklist
+const trelloCardId = 'we7nOhd5'; // Replace with a valid card ID
+fetchChecklist(trelloCardId);
