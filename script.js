@@ -1,25 +1,23 @@
 async function fetchChecklist(cardId) {
     try {
-        // Call your serverless function to fetch the checklist data
+        console.log(`Fetching checklist for card ID: ${cardId}`); // Debug log
         const response = await fetch(`/api/trello?cardId=${cardId}`);
+        console.log(`Response status: ${response.status}`); // Debug log
+
         if (!response.ok) {
             throw new Error(`Failed to fetch checklist: ${response.statusText}`);
         }
 
         const data = await response.json();
+        console.log('Checklist Data:', data); // Debug log
 
-        // Extract the checklist items
-        const checklistItems = data[0]?.checkItems || []; // Assuming you're working with the first checklist
-
-        // Populate the checklist in the HTML
+        const checklistItems = data[0]?.checkItems || [];
         const checklistContainer = document.getElementById('checklist');
-        checklistContainer.innerHTML = ''; // Clear any existing tasks
+        checklistContainer.innerHTML = '';
 
         checklistItems.forEach(item => {
-            // Create a new list item for each checklist entry
             const listItem = document.createElement('li');
-            const isChecked = item.state === 'complete'; // Determine checkbox state
-
+            const isChecked = item.state === 'complete';
             listItem.innerHTML = `
                 <input type="checkbox" id="${item.id}" ${isChecked ? 'checked' : ''}>
                 <label for="${item.id}">${item.name}</label>
