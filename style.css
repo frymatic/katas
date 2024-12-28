@@ -1,16 +1,16 @@
 /* General Styles */
 body {
     font-family: 'Orbitron', sans-serif;
-    background: radial-gradient(circle, #0f2027, #203a43, #2c5364);
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* Dark gradient for galactic theme */
     margin: 0;
     padding: 20px;
     color: #ffffff;
-    text-shadow: 0 0 3px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.3); /* Soft glow for text */
 }
 
 /* App Container */
 #app {
-    background: rgba(15, 32, 39, 0.85);
+    background: rgba(15, 32, 39, 0.85); /* Semi-transparent dark background */
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
@@ -23,19 +23,19 @@ body {
 header h1 {
     font-size: 3rem;
     margin: 0;
-    color: #f0e130;
-    text-shadow: 0 0 10px rgba(240, 225, 48, 0.7), 0 0 30px rgba(240, 225, 48, 0.5);
+    color: #f0e130; /* Golden color for a futuristic look */
+    text-shadow: 0 0 10px rgba(240, 225, 48, 0.7), 0 0 30px rgba(240, 225, 48, 0.5); /* Glow effect */
 }
 
 header p {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin-top: 10px;
     color: rgba(255, 255, 255, 0.8);
 }
 
 /* Checklist Sections */
 .checklist-section {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent for layering */
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     padding: 20px;
@@ -46,7 +46,7 @@ header p {
 .checklist-section h2 {
     font-size: 1.8rem;
     margin-bottom: 15px;
-    color: #f0e130;
+    color: #f0e130; /* Matches header color */
     text-shadow: 0 0 5px rgba(240, 225, 48, 0.7);
 }
 
@@ -62,26 +62,26 @@ ul.checklist li {
     align-items: center;
     padding: 10px;
     margin: 5px 0;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.4); /* Slightly lighter than the background */
     border-radius: 8px;
     transition: background 0.3s, transform 0.2s;
     font-size: 1.2rem;
 }
 
 ul.checklist li:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1); /* Subtle hover effect */
     transform: scale(1.02);
 }
 
 ul.checklist li input[type="checkbox"] {
     margin-right: 15px;
     transform: scale(1.5);
-    accent-color: #f0e130;
+    accent-color: #f0e130; /* Golden checkboxes */
 }
 
 ul.checklist li label {
     font-size: 1rem;
-    text-shadow: 0 0 3px rgba(255, 255, 255, 0.2);
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.2); /* Slight glow for text */
 }
 
 /* Footer Styles */
