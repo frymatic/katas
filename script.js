@@ -1,9 +1,27 @@
 async function fetchAndDisplayChecklists(cardId) {
     try {
-        // Fetch all checklists for the card
-        const response = await fetch(`/api/trello?cardId=${cardId}`);
+        const token = localStorage.getItem('trelloToken'); // Retrieve token from local storage
+
+        if (!token) {
+            // If no token exists, redirect to Trello's authentication
+            const authUrl = `https://trello.com/1/authorize?expiration=1hour&name=YourAppName&scope=read,write&response_type=token&key=YOUR_TRELLO_API_KEY`;
+            alert('You need to log in to Trello.');
+            window.location.href = authUrl;
+            return;
+        }
+
+        const response = await fetch(`/api/trello?cardId=${cardId}&token=${token}`);
         if (!response.ok) {
-            throw new Error(`Failed to fetch checklists: ${response.statusText}`);
+            const errorData = await response.json();
+
+            // Handle token expiration or missing token
+            if (response.status === 401 && errorData.authUrl) {
+                alert('Your session has expired. Please log in again.');
+                window.location.href = errorData.authUrl;
+                return;
+            }
+
+            throw new Error(`Failed to fetch checklists: ${errorData.error || response.statusText}`);
         }
 
         let checklists = await response.json();
@@ -59,8 +77,19 @@ async function fetchAndDisplayChecklists(cardId) {
     }
 }
 
-// Fetch the checklists when the page loads and start polling
+// Fetch the checklists when the page loads
 document.addEventListener('DOMContentLoaded', () => {
-    const trelloCardId = 'rLxcVYX4'; // Replace with your actual card ID
-    startPolling(trelloCardId);
+    // Check for a token in the URL hash
+    const urlParams = new URLSearchParams(window.location.hash.substring(1)); // Get URL hash parameters
+    const token = urlParams.get('token');
+
+    if (token) {
+        localStorage.setItem('trelloToken', token); // Save token to localStorage
+        alert('Login successful!');
+        window.location.href = '/'; // Redirect to main page
+    } else {
+        // Continue with the app if no token is found in the URL
+        const trelloCardId = 'rLxcVYX4'; // Replace with your actual card ID
+        fetchAndDisplayChecklists(trelloCardId);
+    }
 });
