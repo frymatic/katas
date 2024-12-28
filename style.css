@@ -1,62 +1,56 @@
+/* General Styles */
 body {
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #1e1e2f, #28293d);
+    font-family: 'Orbitron', sans-serif;
+    background: radial-gradient(circle, #0f2027, #203a43, #2c5364);
     margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    color: #ffffff;
-}
-
-#app {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
     padding: 20px;
+    color: #ffffff;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+/* App Container */
+#app {
+    background: rgba(15, 32, 39, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
-    width: 90%;
-    max-width: 800px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    max-width: 900px;
+    margin: auto;
 }
 
-header {
-    text-align: center;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-    padding-bottom: 10px;
-}
-
+/* Header Styles */
 header h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin: 0;
-    color: #ffcc00;
-    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    color: #f0e130;
+    text-shadow: 0 0 10px rgba(240, 225, 48, 0.7), 0 0 30px rgba(240, 225, 48, 0.5);
 }
 
 header p {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.5rem;
+    margin-top: 10px;
+    color: rgba(255, 255, 255, 0.8);
 }
 
+/* Checklist Sections */
 .checklist-section {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .checklist-section h2 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin-bottom: 15px;
-    color: #ffcc00;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-    padding-bottom: 5px;
+    color: #f0e130;
+    text-shadow: 0 0 5px rgba(240, 225, 48, 0.7);
 }
 
+/* Checklist Items */
 ul.checklist {
     list-style: none;
     padding: 0;
@@ -66,32 +60,53 @@ ul.checklist {
 ul.checklist li {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: 10px;
     margin: 5px 0;
     background: rgba(0, 0, 0, 0.2);
     border-radius: 8px;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.2s;
+    font-size: 1.2rem;
 }
 
 ul.checklist li:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.02);
 }
 
-input[type="checkbox"] {
+ul.checklist li input[type="checkbox"] {
     margin-right: 15px;
-    transform: scale(1.2);
-    accent-color: #ffcc00;
+    transform: scale(1.5);
+    accent-color: #f0e130;
 }
 
+ul.checklist li label {
+    font-size: 1rem;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+/* Footer Styles */
 footer {
-    text-align: center;
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.6);
     margin-top: 20px;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    font-style: italic;
 }
 
-footer p {
-    margin: 0;
-    font-style: italic;
+/* Optional Glow Button Styles */
+button {
+    background: linear-gradient(45deg, #f0e130, #ffe347);
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(240, 225, 48, 0.5), 0 0 20px rgba(240, 225, 48, 0.3);
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(240, 225, 48, 0.7), 0 0 30px rgba(240, 225, 48, 0.5);
 }
