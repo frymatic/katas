@@ -60,7 +60,7 @@ async function fetchAndDisplayChecklists(cardId) {
 }
 
 // Poll for updates every 10 seconds
-function startPolling(cardId, interval = 10000) {
+function startPolling(cardId, interval = 1000) {
     fetchAndDisplayChecklists(cardId); // Fetch initially
     setInterval(() => {
         console.log('Polling for updates...');
