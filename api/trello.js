@@ -1,11 +1,25 @@
 export default async function handler(req, res) {
-    const { TRELLO_API_KEY, TRELLO_API_SECRET } = process.env;
-    const trelloCardId = req.query.cardId;
+    try {
+        const { TRELLO_API_KEY, TRELLO_API_TOKEN } = process.env;
+        const cardId = req.query.cardId;
 
-    const response = await fetch(
-        `https://api.trello.com/1/cards/${trelloCardId}/checklists?key=${TRELLO_API_KEY}&token=${TRELLO_API_SECRET}`
-    );
-    const data = await response.json();
+        if (!TRELLO_API_KEY || !TRELLO_API_TOKEN) {
+            throw new Error('Missing Trello API Key or Token');
+        }
 
-    res.status(200).json(data);
+        const trelloUrl = `https://api.trello.com/1/cards/${cardId}/checklists?key=${TRELLO_API_KEY}&token=${TRELLO_API_TOKEN}`;
+        const response = await fetch(trelloUrl);
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Trello API Error:', errorText);
+            return res.status(response.status).json({ error: `Trello API Error: ${errorText}` });
+        }
+
+        const data = await response.json();
+        res.status(200).json(data);
+    } catch (error) {
+        console.error('Serverless Function Error:', error);
+        res.status(500).json({ error: error.message });
+    }
 }
