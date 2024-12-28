@@ -1,41 +1,53 @@
-async function fetchChecklist(cardId) {
+async function fetchAndDisplayChecklists(cardId) {
     try {
-        // Call the serverless function to fetch the checklist data
+        // Fetch all checklists for the card
         const response = await fetch(`/api/trello?cardId=${cardId}`);
         if (!response.ok) {
-            throw new Error(`Failed to fetch checklist: ${response.statusText}`);
+            throw new Error(`Failed to fetch checklists: ${response.statusText}`);
         }
 
-        // Parse the response data
-        const data = await response.json();
+        const checklists = await response.json();
+        const container = document.getElementById('checklists-container');
+        container.innerHTML = ''; // Clear any existing checklists
 
-        // Ensure there is at least one checklist in the response
-        if (!data || data.length === 0) {
-            throw new Error('No checklists found in the response.');
-        }
+        checklists.forEach(checklist => {
+            // Create a section for each checklist
+            const section = document.createElement('section');
+            section.classList.add('checklist-section');
 
-        // Extract the first checklist's items
-        const checklistItems = data[0].checkItems;
+            // Add checklist title
+            const title = document.createElement('h2');
+            title.textContent = checklist.name;
+            section.appendChild(title);
 
-        // Populate the checklist in the HTML
-        const checklistContainer = document.getElementById('checklist');
-        checklistContainer.innerHTML = ''; // Clear any existing tasks
+            // Add checklist items
+            const list = document.createElement('ul');
+            list.classList.add('checklist');
 
-        checklistItems.forEach(item => {
-            // Create a new list item for each checklist entry
-            const listItem = document.createElement('li');
-            const isChecked = item.state === 'complete'; // Determine if the task is completed
+            checklist.checkItems.forEach(item => {
+                const listItem = document.createElement('li');
 
-            listItem.innerHTML = `
-                <input type="checkbox" id="${item.id}" ${isChecked ? 'checked' : ''}>
-                <label for="${item.id}">${item.name}</label>
-            `;
-            checklistContainer.appendChild(listItem);
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = item.id;
+                checkbox.checked = item.state === 'complete';
+
+                const label = document.createElement('label');
+                label.htmlFor = item.id;
+                label.textContent = item.name;
+
+                listItem.appendChild(checkbox);
+                listItem.appendChild(label);
+                list.appendChild(listItem);
+            });
+
+            section.appendChild(list);
+            container.appendChild(section);
         });
 
-        console.log('Checklist successfully populated.');
+        console.log('All checklists successfully displayed.');
     } catch (error) {
-        console.error('Error fetching or displaying checklist:', error);
+        console.error('Error fetching or displaying checklists:', error);
     }
 }
 
