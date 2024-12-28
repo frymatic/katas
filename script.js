@@ -59,15 +59,6 @@ async function fetchAndDisplayChecklists(cardId) {
     }
 }
 
-// Poll for updates every 10 seconds
-function startPolling(cardId, interval = 1000) {
-    fetchAndDisplayChecklists(cardId); // Fetch initially
-    setInterval(() => {
-        console.log('Polling for updates...');
-        fetchAndDisplayChecklists(cardId);
-    }, interval);
-}
-
 // Fetch the checklists when the page loads and start polling
 document.addEventListener('DOMContentLoaded', () => {
     const trelloCardId = 'rLxcVYX4'; // Replace with your actual card ID
