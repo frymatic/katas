@@ -1,4 +1,4 @@
-async function fetchChecklists(cardId) {
+async function fetchAndDisplayChecklists(cardId) {
     try {
         // Fetch all checklists for the card
         const response = await fetch(`/api/trello?cardId=${cardId}`);
@@ -54,8 +54,8 @@ async function fetchChecklists(cardId) {
     }
 }
 
-// Fetch the checklist when the page loads
+// Fetch the checklists when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     const trelloCardId = 'we7nOhd5'; // Replace with your actual card ID
-    fetchChecklist(trelloCardId);
+    fetchAndDisplayChecklists(trelloCardId);
 });
