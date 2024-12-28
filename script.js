@@ -70,6 +70,6 @@ function startPolling(cardId, interval = 1000) {
 
 // Fetch the checklists when the page loads and start polling
 document.addEventListener('DOMContentLoaded', () => {
-    const trelloCardId = 'we7nOhd5'; // Replace with your actual card ID
+    const trelloCardId = 'rLxcVYX4'; // Replace with your actual card ID
     startPolling(trelloCardId);
 });
