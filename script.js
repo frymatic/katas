@@ -11,7 +11,6 @@ async function fetchAndDisplayChecklists(cardId) {
 
         // Sort checklists by the `pos` property
         checklists = checklists.sort((a, b) => a.pos - b.pos);
-        console.log('Checklists API Response (Sorted):', checklists);
 
         const container = document.getElementById('checklists-container');
         container.innerHTML = ''; // Clear any existing checklists
@@ -60,8 +59,17 @@ async function fetchAndDisplayChecklists(cardId) {
     }
 }
 
-// Fetch the checklists when the page loads
+// Poll for updates every 10 seconds
+function startPolling(cardId, interval = 10000) {
+    fetchAndDisplayChecklists(cardId); // Fetch initially
+    setInterval(() => {
+        console.log('Polling for updates...');
+        fetchAndDisplayChecklists(cardId);
+    }, interval);
+}
+
+// Fetch the checklists when the page loads and start polling
 document.addEventListener('DOMContentLoaded', () => {
     const trelloCardId = 'we7nOhd5'; // Replace with your actual card ID
-    fetchAndDisplayChecklists(trelloCardId);
+    startPolling(trelloCardId);
 });
