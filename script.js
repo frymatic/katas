@@ -1,4 +1,4 @@
-async function fetchAndDisplayChecklists(cardId) {
+async function fetchChecklists(cardId) {
     try {
         // Fetch all checklists for the card
         const response = await fetch(`/api/trello?cardId=${cardId}`);
