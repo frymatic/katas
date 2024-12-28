@@ -1,66 +1,97 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background: #f4f4f4;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #1e1e2f, #28293d);
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    color: #ffffff;
 }
 
 #app {
-    background: white;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    width: 90%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 header {
-    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 10px;
 }
 
 header h1 {
-    font-size: 28px;
+    font-size: 2.5rem;
     margin: 0;
-    color: #007bff;
+    color: #ffcc00;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
 
 header p {
-    font-size: 16px;
-    color: #555;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
 }
 
-main h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: #333;
+.checklist-section {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-ul {
+.checklist-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #ffcc00;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 5px;
+}
+
+ul.checklist {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
-li {
-    margin: 10px 0;
-    font-size: 18px;
-    text-align: left;
+ul.checklist li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 5px 0;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+ul.checklist li:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
 
 input[type="checkbox"] {
-    margin-right: 10px;
+    margin-right: 15px;
+    transform: scale(1.2);
+    accent-color: #ffcc00;
 }
 
 footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
     margin-top: 20px;
-    font-size: 14px;
-    color: #777;
 }
 
 footer p {
     margin: 0;
+    font-style: italic;
 }

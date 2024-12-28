@@ -7,9 +7,12 @@ async function fetchAndDisplayChecklists(cardId) {
         }
 
         const checklists = await response.json();
+        console.log('Checklists API Response:', checklists); // Debugging API response
+
         const container = document.getElementById('checklists-container');
         container.innerHTML = ''; // Clear any existing checklists
 
+        // Process each checklist
         checklists.forEach(checklist => {
             // Create a section for each checklist
             const section = document.createElement('section');
@@ -17,7 +20,7 @@ async function fetchAndDisplayChecklists(cardId) {
 
             // Add checklist title
             const title = document.createElement('h2');
-            title.textContent = checklist.name;
+            title.textContent = checklist.name; // Title of the checklist
             section.appendChild(title);
 
             // Add checklist items
